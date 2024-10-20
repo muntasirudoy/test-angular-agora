@@ -19,7 +19,7 @@ export class LocalStreamComponent implements AfterViewInit {
   @ViewChild('localVideo', { static: true })
   localVideo!: ElementRef<HTMLDivElement>;
   @Output() leaveChannel = new EventEmitter<void>();
-
+  displayName: any;
   private client: IAgoraRTCClient;
 
   private localMicTrack!: ILocalTrack;

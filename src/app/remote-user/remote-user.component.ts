@@ -35,6 +35,6 @@ export class RemoteUserComponent implements OnInit, AfterViewInit {
   }
 
   get remoteVideoDivId(): string {
-    return this.remoteVideo.nativeElement.id;
+    return this.remoteVideo?.nativeElement.id;
   }
 }
