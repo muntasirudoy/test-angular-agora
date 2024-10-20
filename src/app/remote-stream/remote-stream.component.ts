@@ -23,6 +23,7 @@ export class RemoteStreamComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('remoteVideoContainer', { read: ViewContainerRef })
   remoteVideoContainer!: ViewContainerRef;
+  displayName: any;
 
   constructor(private agoraService: AgoraService) {
     this.client = this.agoraService.getClient();
@@ -52,6 +53,7 @@ export class RemoteStreamComponent implements OnInit, OnDestroy, AfterViewInit {
     mediaType: 'audio' | 'video' | 'datachannel'
   ) => {
     await this.client.subscribe(user, mediaType);
+    this.displayName = user.uid;
 
     if (mediaType === 'audio') {
       user.audioTrack?.play();
