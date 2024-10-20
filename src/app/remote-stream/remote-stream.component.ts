@@ -16,34 +16,26 @@ import { AgoraService } from '../agora.service';
   templateUrl: './remote-stream.component.html',
   styleUrls: ['./remote-stream.component.scss'],
 })
-export class RemoteStreamComponent implements OnInit, OnDestroy, AfterViewInit {
+export class RemoteStreamComponent implements OnInit, OnDestroy {
   client: IAgoraRTCClient;
-  remoteUserComponentRefs: Map<string, ComponentRef<RemoteUserComponent>> =
-    new Map();
-
+  remoteUserComponentRefs: Map<string, ComponentRef<RemoteUserComponent>>;
+  displayName: any;
   @ViewChild('remoteVideoContainer', { read: ViewContainerRef })
   remoteVideoContainer!: ViewContainerRef;
-  displayName: any;
 
   constructor(private agoraService: AgoraService) {
     this.client = this.agoraService.getClient();
+    this.remoteUserComponentRefs = new Map();
   }
 
   ngOnInit(): void {
-    // Register event listeners
+    // add listeners when component mounts
     this.client.on('user-published', this.handleRemoteUserPublished);
     this.client.on('user-unpublished', this.handleRemoteUserUnpublished);
   }
 
-  ngAfterViewInit(): void {
-    // Ensure the ViewChild is ready before interacting with it
-    if (!this.remoteVideoContainer) {
-      console.error('remoteVideoContainer is not available');
-    }
-  }
-
   ngOnDestroy(): void {
-    // Unregister event listeners
+    // remove listeners when component is removed
     this.client.off('user-published', this.handleRemoteUserPublished);
     this.client.off('user-unpublished', this.handleRemoteUserUnpublished);
   }
@@ -53,28 +45,19 @@ export class RemoteStreamComponent implements OnInit, OnDestroy, AfterViewInit {
     mediaType: 'audio' | 'video' | 'datachannel'
   ) => {
     await this.client.subscribe(user, mediaType);
-    this.displayName = user.uid;
-
     if (mediaType === 'audio') {
       user.audioTrack?.play();
     } else if (mediaType === 'video') {
-      const uid = user.uid.toString();
-
-      // Ensure ViewChild is available
-      if (this.remoteVideoContainer) {
-        const remoteUserComponentRef: ComponentRef<RemoteUserComponent> =
-          this.remoteVideoContainer.createComponent(RemoteUserComponent);
-
-        remoteUserComponentRef.instance.uid = uid;
-        remoteUserComponentRef.instance.onReady = (remoteUserDiv) => {
-          user.videoTrack?.play(remoteUserDiv);
-        };
-
-        this.remoteUserComponentRefs.set(uid, remoteUserComponentRef);
-        console.log(this.remoteUserComponentRefs);
-      } else {
-        console.error('remoteVideoContainer is not initialized');
-      }
+      const uid = user.uid;
+      this.displayName = user.uid ?? '';
+      // create a remote user component for each new remote user and add to DOM
+      const remoteUserComponentRef: ComponentRef<RemoteUserComponent> =
+        this.remoteVideoContainer.createComponent(RemoteUserComponent);
+      remoteUserComponentRef.instance.uid = uid;
+      remoteUserComponentRef.instance.onReady = (remoteUserDiv) => {
+        user.videoTrack?.play(remoteUserDiv);
+      };
+      this.remoteUserComponentRefs.set(uid.toString(), remoteUserComponentRef);
     }
   };
 
@@ -84,24 +67,23 @@ export class RemoteStreamComponent implements OnInit, OnDestroy, AfterViewInit {
   ) => {
     if (mediaType === 'video') {
       const remoteUserUid = user.uid.toString();
+      // retrieve the div from remoteUserComponentRefs and remove it from DOM
       const componentRef = this.remoteUserComponentRefs.get(remoteUserUid);
-
-      if (componentRef && this.remoteVideoContainer) {
+      if (componentRef) {
         const viewIndex = this.remoteVideoContainer.indexOf(
-          componentRef.hostView
+          componentRef?.hostView
         );
         this.remoteVideoContainer.remove(viewIndex);
+        // remove entry from remoteUserComponentRefs
         this.remoteUserComponentRefs.delete(remoteUserUid);
       } else {
-        console.error(`Unable to find remoteUser with UID: ${user.uid}`);
+        console.log(`Unable to find remoteUser with UID: ${user.uid}`);
       }
     }
   };
 
   clearRemoteUsers(): void {
-    if (this.remoteVideoContainer) {
-      this.remoteVideoContainer.clear();
-    }
+    this.remoteVideoContainer.clear();
     this.remoteUserComponentRefs.clear();
   }
 }
