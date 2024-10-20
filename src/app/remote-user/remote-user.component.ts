@@ -14,27 +14,36 @@ import { UID } from 'agora-rtc-sdk-ng';
   styleUrls: ['./remote-user.component.scss'],
 })
 export class RemoteUserComponent implements OnInit, AfterViewInit {
-  @Input() uid!: UID;
-  @Input() onReady?: (element: HTMLElement) => void;
-  @ViewChild('remoteVideo') remoteVideo!: ElementRef<HTMLElement>;
+  @Input() uid!: UID; // The UID input for the remote user
+  @Input() onReady?: (element: HTMLElement) => void; // Optional callback to handle element ready
+  @ViewChild('remoteVideo', { static: false })
+  remoteVideo!: ElementRef<HTMLElement>;
 
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
+    // Called once the component is initialized
     console.log(`Remote user component initialized for UID: ${this.uid}`);
   }
 
   ngAfterViewInit(): void {
-    if (this.onReady) {
-      this.onReady(this.remoteVideo.nativeElement);
+    // Ensuring the view is fully initialized and `remoteVideo` is available
+    if (this.remoteVideo && this.remoteVideo.nativeElement) {
+      if (this.onReady) {
+        this.onReady(this.remoteVideo.nativeElement); // Trigger the callback if provided
+      }
+    } else {
+      console.error('Remote video element not found');
     }
   }
 
+  // Getter for native element
   get nativeElement(): HTMLElement {
     return this.elementRef.nativeElement;
   }
 
+  // Getter for the remote video div ID
   get remoteVideoDivId(): string {
-    return this.remoteVideo?.nativeElement.id;
+    return this.remoteVideo?.nativeElement?.id || '';
   }
 }
