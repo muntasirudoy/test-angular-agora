@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewComponent } from './view.component';
+import { EChamberComponent } from './e-chamber.component';
 
-describe('ViewComponent', () => {
-  let component: ViewComponent;
-  let fixture: ComponentFixture<ViewComponent>;
+describe('EChamberComponent', () => {
+  let component: EChamberComponent;
+  let fixture: ComponentFixture<EChamberComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewComponent]
+      declarations: [EChamberComponent]
     });
-    fixture = TestBed.createComponent(ViewComponent);
+    fixture = TestBed.createComponent(EChamberComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

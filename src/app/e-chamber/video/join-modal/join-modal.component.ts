@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { AgoraService } from '../agora.service';
+import { AgoraService } from '../../../agora.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

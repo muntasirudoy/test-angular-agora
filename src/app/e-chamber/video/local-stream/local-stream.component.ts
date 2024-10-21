@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { AgoraService } from '../agora.service';
+import { AgoraService } from '../../../agora.service';
 import { IAgoraRTCClient, ILocalTrack } from 'agora-rtc-sdk-ng';
 import { Subscription } from 'rxjs';
 

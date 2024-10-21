@@ -1,0 +1,90 @@
+<main id="app-container" class="main">
+  <div
+    class="grid grid-cols-12 bg-slate-100 box-border md:h-screen overflow-hidden"
+  >
+    <div
+      class="col-span-12 md:col-span-3 row-span-1 bg-gray-50 border-[1px] p-4 relative"
+    >
+      <div>
+        <img src="" alt="" />
+      </div>
+      <h1 class="text-[20px] font-bold text-gray-800">Patient Info</h1>
+
+      <div class="py-4 flex items-center px-2 gap-5">
+        <div>
+          <label for="name" class="text-[14px] text-gray-500 font-semibold"
+            >Age:</label
+          >
+          <p class="font-semibold text-[16px] text-gray-800">26 Yrs</p>
+        </div>
+        <span> | </span>
+        <div>
+          <label for="name" class="text-[14px] text-gray-500 font-semibold"
+            >Gender:</label
+          >
+          <p class="font-semibold text-[16px] text-gray-800">Male</p>
+        </div>
+      </div>
+      <hr />
+      <div class="py-4">
+        <div>
+          <label for="name" class="text-[18px] text-gray-800 font-semibold"
+            >Previous History:</label
+          >
+          <p class="font-normal text-[14px] text-gray-800 mt-1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+            minima, aperiam atque quos temporibus harum debitis dolorum possimus
+            officiis reiciendis.
+          </p>
+        </div>
+      </div>
+      <hr />
+
+      <div class="absolute bottom-0 w-full left-0 box-border">
+        <button
+          class="bg-gray-200 text-gray-800 py-3 text-center rounded-md w-full"
+        >
+          Back to Dashboard
+        </button>
+      </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-5 h-full md:overflow-hidden">
+      <div
+        class="bg-white w-full min-h-[85vh] md:min-h-[85%] border-[1px] relative"
+      >
+        <div
+          class="w-full p-4 box-border h-[80px] border-b-[1px] border-gray-300 bg-gray-100 flex gap-5"
+        >
+          <div
+            class="w-[50px] h-[50px] rounded-md bg-gray-300 flex justify-center items-center"
+          >
+            MR
+          </div>
+          <div>
+            <h2 class="text-[18px] font-semibold text-gray-800">
+              Mofizur Rahman
+            </h2>
+            <p class="text-[12px] text-gray-500">Patient code : SG325FG4787T</p>
+          </div>
+        </div>
+        <app-remote-stream #remoteStreamsContainer></app-remote-stream>
+        <app-local-stream
+          *ngIf="isLocalStreamVisible"
+          (leaveChannel)="handleLeaveChannel()"
+        ></app-local-stream>
+      </div>
+      <div class="border-[1px] mt-3 bg-white h-[25%] relative">
+        <!-- <app-media-controls></app-media-controls> -->
+      </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-4 row-span-1 bg-white border-[1px]">
+      Prescription
+      <app-join-modal
+        *ngIf="isJoinModalVisible"
+        (joinChannel)="handleJoinChannel()"
+      ></app-join-modal>
+    </div>
+  </div>
+</main>

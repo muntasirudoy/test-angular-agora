@@ -7,9 +7,9 @@ import {
   ViewContainerRef,
   AfterViewInit,
 } from '@angular/core';
-import { RemoteUserComponent } from '../remote-user/remote-user.component';
 import { IAgoraRTCClient, IAgoraRTCRemoteUser } from 'agora-rtc-sdk-ng';
-import { AgoraService } from '../agora.service';
+import { AgoraService } from '../../../agora.service';
+import { RemoteUserComponent } from '../remote-user/remote-user.component';
 
 @Component({
   selector: 'app-remote-stream',
@@ -54,7 +54,7 @@ export class RemoteStreamComponent implements OnInit, OnDestroy {
       const remoteUserComponentRef: ComponentRef<RemoteUserComponent> =
         this.remoteVideoContainer.createComponent(RemoteUserComponent);
       remoteUserComponentRef.instance.uid = uid;
-      remoteUserComponentRef.instance.onReady = (remoteUserDiv) => {
+      remoteUserComponentRef.instance.onReady = (remoteUserDiv: any) => {
         user.videoTrack?.play(remoteUserDiv);
       };
       this.remoteUserComponentRefs.set(uid.toString(), remoteUserComponentRef);
