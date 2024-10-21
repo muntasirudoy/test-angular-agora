@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class JoinModalComponent implements OnInit, AfterViewInit {
   @ViewChild('modalOverlay') modalOverlay!: ElementRef<HTMLDivElement>;
-  @ViewChild('joinChannelForm') joinChannelForm!: ElementRef<HTMLFormElement>;
+  // @ViewChild('joinChannelForm') joinChannelForm!: ElementRef<HTMLFormElement>;
   @Output() joinChannel = new EventEmitter<void>();
 
   username: string = '';
@@ -41,10 +41,10 @@ export class JoinModalComponent implements OnInit, AfterViewInit {
     this.modalOverlay.nativeElement.classList.add('show');
   }
 
-  async onSubmit(channelName: string, agoraToken?: string, userID?: string) {
+  async onSubmit() {
     await this.agoraService.joinChannel(
       this.aptCode,
-      agoraToken ?? null,
+      null,
       this.username ?? null
     );
     this.joinChannel.emit(); // notify the app to hide the model and show the local video

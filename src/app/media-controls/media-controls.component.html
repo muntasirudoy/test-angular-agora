@@ -1,18 +1,38 @@
-<div id="local-media-controls">
-  <button #micButton (click)="handleMicToggle($event)" class="media-active">
-    Mic
-  </button>
-  <button #videoButton (click)="handleVideoToggle($event)" class="media-active">
-    Video
-  </button>
-  <button
-    #screenShareButton
-    (click)="handleScreenShare($event)"
-    class="media-active"
+<div class="w-full">
+  <div
+    class="bg-white absolute border-[12px] border-slate-100 left-1/2 -bottom-[50px] z-10 items-center -translate-x-1/2 rounded-full w-[80%] h-[80px] flex gap-12 justify-center"
   >
-    Screen
-  </button>
-  <button #leaveButton (click)="handleLeaveChannel()" class="media-active">
-    End
-  </button>
+    <img
+      #micButton
+      (click)="handleMicToggle($event)"
+      class="media-active"
+      class="w-[30px] h-[30px]"
+      src="/assets/mic.svg"
+      alt=""
+    />
+    <img
+      #videoButton
+      (click)="handleVideoToggle($event)"
+      class="media-active"
+      class="w-[30px] h-[30px]"
+      src="/assets/video.svg"
+      alt=""
+    />
+    <img
+      #leaveButton
+      (click)="handleLeaveChannel()"
+      class="media-active"
+      class="w-[30px] h-[30px]"
+      src="/assets/call.svg"
+      alt=""
+    />
+  </div>
 </div>
+
+<!-- <button
+#screenShareButton
+(click)="handleScreenShare($event)"
+class="media-active"
+>
+Screen
+</button> -->

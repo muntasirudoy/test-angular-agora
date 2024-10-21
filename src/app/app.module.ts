@@ -11,6 +11,7 @@ import { JoinModalComponent } from './join-modal/join-modal.component';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ViewComponent } from './view/view.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     RemoteStreamComponent,
     LocalStreamComponent,
     MediaControlsComponent,
+    ViewComponent,
   ],
   imports: [
     FormsModule,
