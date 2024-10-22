@@ -1,12 +1,12 @@
 <div class="w-full">
   <div
-    class="bg-white absolute border-[12px] border-slate-100 left-1/2 -bottom-[50px] z-10 items-center -translate-x-1/2 rounded-full w-[80%] h-[80px] flex gap-12 justify-center"
+    class="bg-white absolute border-[6px] md:border-[12px] border-slate-100 left-1/2 -bottom-[23px] md:-bottom-[50px] z-10 items-center -translate-x-1/2 rounded-full w-[65%] md:w-[80%] md:h-[80px] h-[50px] flex gap-8 md:gap-12 justify-center"
   >
     <img
       #micButton
       (click)="handleMicToggle($event)"
       class="media-active"
-      class="w-[30px] h-[30px]"
+      class="w-[22px] md:w-[30px] md:h-[30px] h-[22px]"
       src="/assets/mic.svg"
       alt=""
     />
@@ -14,7 +14,7 @@
       #videoButton
       (click)="handleVideoToggle($event)"
       class="media-active"
-      class="w-[30px] h-[30px]"
+      class="w-[22px] md:w-[30px] md:h-[30px] h-[22px]"
       src="/assets/video.svg"
       alt=""
     />
@@ -22,7 +22,7 @@
       #leaveButton
       (click)="handleLeaveChannel()"
       class="media-active"
-      class="w-[30px] h-[30px]"
+      class="w-[22px] md:w-[30px] md:h-[30px] h-[22px]"
       src="/assets/call.svg"
       alt=""
     />

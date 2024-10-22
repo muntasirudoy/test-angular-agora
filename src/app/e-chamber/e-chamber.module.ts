@@ -6,6 +6,7 @@ import { RemoteStreamComponent } from './video/remote-stream/remote-stream.compo
 import { LocalStreamComponent } from './video/local-stream/local-stream.component';
 import { MediaControlsComponent } from './video/media-controls/media-controls.component';
 import { FormsModule } from '@angular/forms';
+import { BottomNavComponent } from './components/bottom-nav/bottom-nav.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     RemoteStreamComponent,
     LocalStreamComponent,
     MediaControlsComponent,
+    BottomNavComponent,
   ],
   imports: [CommonModule, FormsModule],
   exports: [EChamberComponent],

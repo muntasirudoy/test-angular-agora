@@ -1,13 +1,8 @@
 <main id="app-container" class="main">
-  <div
-    class="grid grid-cols-12 bg-slate-100 box-border md:h-screen overflow-hidden"
-  >
+  <div class="grid grid-cols-12 bg-slate-100 h-fit">
     <div
-      class="col-span-12 md:col-span-3 row-span-1 bg-gray-50 border-[1px] p-4 relative"
+      class="col-span-12 hidden md:block md:col-span-3 row-span-1 bg-white md:border-[1px] p-4 relative"
     >
-      <div>
-        <img src="" alt="" />
-      </div>
       <h1 class="text-[20px] font-bold text-gray-800">Patient Info</h1>
 
       <div class="py-4 flex items-center px-2 gap-5">
@@ -49,42 +44,44 @@
       </div>
     </div>
 
-    <div class="col-span-12 md:col-span-5 h-full md:overflow-hidden">
-      <div
-        class="bg-white w-full min-h-[85vh] md:min-h-[85%] border-[1px] relative"
-      >
+    <div class="col-span-12 md:col-span-5 h-full">
+      <div class="bg-white w-full min-h-[85vh] md:border-[1px] relative">
         <div
-          class="w-full p-4 box-border h-[80px] border-b-[1px] border-gray-300 bg-gray-100 flex gap-5"
+          class="w-full md:p-4 p-3 box-border md:h-[80px] border-b-[1px] border-gray-300 bg-gray-100 flex gap-5"
         >
           <div
-            class="w-[50px] h-[50px] rounded-md bg-gray-300 flex justify-center items-center"
+            class="md:w-[50px] w-[40px] md:h-[50px] h-[40px] rounded-md bg-gray-300 flex justify-center items-center"
           >
             MR
           </div>
           <div>
-            <h2 class="text-[18px] font-semibold text-gray-800">
+            <h2 class="md:text-[18px] text-[16px] font-semibold text-gray-800">
               Mofizur Rahman
             </h2>
             <p class="text-[12px] text-gray-500">Patient code : SG325FG4787T</p>
           </div>
         </div>
+        <app-join-modal
+          *ngIf="isJoinModalVisible"
+          (joinChannel)="handleJoinChannel()"
+        ></app-join-modal>
         <app-remote-stream #remoteStreamsContainer></app-remote-stream>
         <app-local-stream
           *ngIf="isLocalStreamVisible"
           (leaveChannel)="handleLeaveChannel()"
         ></app-local-stream>
       </div>
-      <div class="border-[1px] mt-3 bg-white h-[25%] relative">
+      <div class="md:border-[1px] mt-1 md:mt-3 md:h-[25%] hidden md:block">
         <!-- <app-media-controls></app-media-controls> -->
       </div>
     </div>
 
-    <div class="col-span-12 md:col-span-4 row-span-1 bg-white border-[1px]">
+    <div
+      class="col-span-12 md:col-span-4 hidden md:block bg-white md:border-[1px]"
+    >
       Prescription
-      <app-join-modal
-        *ngIf="isJoinModalVisible"
-        (joinChannel)="handleJoinChannel()"
-      ></app-join-modal>
     </div>
   </div>
+
+  <app-bottom-nav />
 </main>
