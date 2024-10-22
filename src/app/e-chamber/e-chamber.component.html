@@ -65,7 +65,9 @@
           *ngIf="isJoinModalVisible"
           (joinChannel)="handleJoinChannel()"
         ></app-join-modal>
-        <app-remote-stream #remoteStreamsContainer></app-remote-stream>
+        <div class="relative h-[calc(100vh-100px)]">
+          <app-remote-stream #remoteStreamsContainer></app-remote-stream>
+        </div>
         <app-local-stream
           *ngIf="isLocalStreamVisible"
           (leaveChannel)="handleLeaveChannel()"
